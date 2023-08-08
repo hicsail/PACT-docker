@@ -1,7 +1,8 @@
 version: '3'
 services:
   pact_container:
-    image: hicsail/PACT
+    platform: linux/amd64
+    image: hicsail/pact
     volumes:
       - ./Intel:/opt/app/Intel
       - ./Example:/opt/app/Example
@@ -11,7 +12,8 @@ services:
     container_name: pact_container
     
   visual_pact_container:
-    image: hicsail/VisualPACT
+    image: hicsail/visualpact
+    platform: linux/amd64
     volumes:
       - ./Intel:/opt/app/Intel
       - ./Example:/opt/app/Example
