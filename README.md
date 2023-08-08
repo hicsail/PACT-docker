@@ -42,3 +42,5 @@ To use the provided `docker-compose.yml` file to run the PACT and VisualPACT con
 
 
 Please note that the provided `docker-compose.yml` file assumes that the required input files for PACT and VisualPACT are correctly placed in the specified directories. Make sure your data files are in the right locations before running the containers.
+
+If you would like to run the docker file by cloning the entire PACT repo, follow this link for directions.  https://github.com/peaclab/PACT
