@@ -7,7 +7,14 @@ To use the provided `docker-compose.yml` file to run the PACT and VisualPACT con
 
    - Docker: https://docs.docker.com/get-docker/
 
-2. Prepare Your Data Files:
+2. Complete post-installation steps for linux based systems :
+   See instructions here https://docs.docker.com/engine/install/linux-postinstall/. Particulary, make sure to add your user to docker group to avoid permission issues on ubuntu. Do so by running,
+
+   ```
+   sudo usermod -aG docker $USER
+   ```
+
+3. Prepare Your Data Files:
    Make sure you have the required input files for PACT and VisualPACT in the following directories:
 
    - For PACT, the following example input files have been provided:
@@ -21,17 +28,17 @@ To use the provided `docker-compose.yml` file to run the PACT and VisualPACT con
      - `/VisualPACT/Example_transient_data_files/IBMPower9transientheatsink_128x128.grid.cir.csv`
      - `/VisualPACT/Example_overlay_images/IBMPower9.png` (if you are using this command)
 
-3. Adjust Paths :
+4. Adjust Paths :
    If you need to change the paths to your OWN input files or directories, make sure to modify the corresponding volume mappings in the `docker-compose.yml` file.
 
-4. Set required environment variables. 
+5. Set required environment variables.
    Execute setenv.sh by running
 
    ```
    source setenv.sh
    ```
 
-5. Run the Containers:
+6. Run the Containers:
    Open your terminal or command prompt, navigate to the directory containing your `docker-compose.yml` file, and run the following commands:
 
    To run PACT:
@@ -52,19 +59,3 @@ To use the provided `docker-compose.yml` file to run the PACT and VisualPACT con
 Please note that the provided `docker-compose.yml` file assumes that the required input files for PACT and VisualPACT are correctly placed in the specified directories. Make sure your data files are in the right locations before running the containers.
 
 If you would like to run the docker file by cloning the entire PACT repo, follow this link for directions. https://github.com/peaclab/PACT
-
-## Permission modifications on ubuntu
-
-There are permission-related changes to be done when running on ubuntu.
-
-1.  Add user to docker group
-
-```
-sudo usermod -aG docker $USER
-```
-
-replace user with actual username, which you can get by running
-
-```
-whoami
-```
