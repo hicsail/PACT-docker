@@ -44,3 +44,53 @@ To use the provided `docker-compose.yml` file to run the PACT and VisualPACT con
 Please note that the provided `docker-compose.yml` file assumes that the required input files for PACT and VisualPACT are correctly placed in the specified directories. Make sure your data files are in the right locations before running the containers.
 
 If you would like to run the docker file by cloning the entire PACT repo, follow this link for directions.  https://github.com/peaclab/PACT
+
+
+
+## Permission modifications on ubuntu
+
+There are permission-related changes to be done when running on ubuntu. 
+
+1.  Add user to docker group
+
+``` 
+sudo usermod -aG docker $USER
+```
+
+replace user with actual username, which you can get by running
+
+```
+whoami
+```
+
+
+2. Update cocker compose configuration to specify the correct permissions for the volume.
+
+Add user id on line 13, directly below container_name
+``` 
+version: '3'
+services:
+  pact_container:
+    platform: linux/amd64
+    image: hicsail/pact
+    volumes:
+      - ./Intel:/opt/app/Intel
+      - ./Example:/opt/app/Example
+      - ./Example_overlay_images:/opt/app/Example_overlay_images
+      - ./Example_transient_data_files:/opt/app/Example_transient_data_files
+    command: /opt/app/Intel/Intel_ID1_lcf.csv /opt/app/Intel/Intel.config /opt/app/Intel/modelParams_Intel.config --gridSteadyFile /opt/app/Intel/Intel.grid.steady
+    container_name: pact_container
+    user: "${UID}:${GID}"  
+```
+to the docker-compose.yml.  
+
+
+To get UID, run
+``` 
+	 id -u
+``` 
+
+5 To get GID, run
+``` 
+	id -g
+``` 
